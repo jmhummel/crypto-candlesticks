@@ -18,12 +18,13 @@ var monies = [
 
 app.message = monies;
 
-// GET /someUrl
-Vue.http.get('https://graphs2.coinmarketcap.com/currencies/ethereum/1516481651000/1516568051000/').then(function (res) {
-    console.log(res);
-}, function(err) {
-    console.error(err);
-});
+monies.forEach(function(coin) {
+    Vue.http.get('https://cors-anywhere.herokuapp.com/https://graphs2.coinmarketcap.com/currencies/' + coin.name + '/1516481651000/1516568051000/')
+        .then(function (res) {
+            console.log(res.body);
 
-console.log("stuff");
+        }, function(err) {
+            console.error(err);
+        });
+});
 
